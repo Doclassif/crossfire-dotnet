@@ -20,7 +20,7 @@ jobs:
     strategy:
       matrix:
         os: [windows-2019]
-        dotnet: ['5.0.x' ]
+        dotnet: ['3.1.x' ]
 
     name: .NET Core ${{ matrix.dotnet }}
 
@@ -40,19 +40,19 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: Shared-Package
-          path: ${{github.workspace}}/src/Shared/bin/Debug/netcoreapp5.0/
+          path: ${{github.workspace}}/src/Shared/bin/Debug/netcoreapp3.1/
       - name: Upload a HGWC Build Artifact
         uses: actions/upload-artifact@v3
         with:
           name: HGWC-Package
-          path: ${{github.workspace}}/src/HGWC/bin/Debug/netcoreapp5.0/
+          path: ${{github.workspace}}/src/HGWC/bin/Debug/netcoreapp3.1/
       - name: Upload a Login Build Artifact
         uses: actions/upload-artifact@v3
         with:
           name: Login-Package
-          path: ${{github.workspace}}/src/Login/bin/Debug/netcoreapp5.0/
+          path: ${{github.workspace}}/src/Login/bin/Debug/netcoreapp3.1/
       - name: Upload a Game Build Artifact
         uses: actions/upload-artifact@v3
         with:
           name: Game-Package
-          path: ${{github.workspace}}/src/Game/bin/Debug/netcoreapp5.0/
+          path: ${{github.workspace}}/src/Game/bin/Debug/netcoreapp3.1/
