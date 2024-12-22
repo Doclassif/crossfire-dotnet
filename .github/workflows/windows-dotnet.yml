@@ -1,7 +1,7 @@
 # This workflow will build a Java project with Maven
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
 
-name: Windows - .NET Core
+name: Windows 2019 - .NET Core
 
 on:
   workflow_dispatch:
@@ -19,9 +19,7 @@ jobs:
 
     strategy:
       matrix:
-        # os: [windows-2019, windows-2016]
         os: [windows-2019]
-        # dotnet: [ '3.1.x', '5.0.x' ]
         dotnet: ['5.0.x' ]
 
     name: .NET Core ${{ matrix.dotnet }}
@@ -42,19 +40,19 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: Shared-Package
-          path: ${{github.workspace}}/src/Shared/bin/Debug/netcoreapp3.1/
+          path: ${{github.workspace}}/src/Shared/bin/Debug/netcoreapp5.0/
       - name: Upload a HGWC Build Artifact
         uses: actions/upload-artifact@v3
         with:
           name: HGWC-Package
-          path: ${{github.workspace}}/src/HGWC/bin/Debug/netcoreapp3.1/
+          path: ${{github.workspace}}/src/HGWC/bin/Debug/netcoreapp5.0/
       - name: Upload a Login Build Artifact
         uses: actions/upload-artifact@v3
         with:
           name: Login-Package
-          path: ${{github.workspace}}/src/Login/bin/Debug/netcoreapp3.1/
+          path: ${{github.workspace}}/src/Login/bin/Debug/netcoreapp5.0/
       - name: Upload a Game Build Artifact
         uses: actions/upload-artifact@v3
         with:
           name: Game-Package
-          path: ${{github.workspace}}/src/Game/bin/Debug/netcoreapp3.1/
+          path: ${{github.workspace}}/src/Game/bin/Debug/netcoreapp5.0/
