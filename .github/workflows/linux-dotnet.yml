@@ -4,6 +4,8 @@
 name: Linux - .NET Core
 
 on:
+  workflow_dispatch:
+  
   push:
     branches: [ main ]
   pull_request:
