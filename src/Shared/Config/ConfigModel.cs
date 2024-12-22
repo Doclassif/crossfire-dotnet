@@ -13,7 +13,7 @@ namespace Shared.Config
 
         public ConfigModel()
         {
-            ConfigLoader config = new ConfigLoader("../Settings.ini");
+            ConfigLoader config = new ConfigLoader("Settings.ini");
             HOST = config.getValue("Host", "127.0.0.1");
             PORT = int.Parse(config.getValue("Port", "39190"));
             DB_IP = config.getValue("DataBaseHost", "localhost");
