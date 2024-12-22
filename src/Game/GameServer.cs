@@ -10,6 +10,8 @@ using Shared.Enum;
 using Shared.Exceptions;
 using Shared.Util;
 using Shared.Config;
+using Shared.Util.Log;
+using Shared.Util.Log.Factories;
 
 namespace Game {
     public class GameServer : Server
@@ -22,7 +24,8 @@ namespace Game {
         {
             ConfigModel config = new ConfigModel();
             api = $"http://{config.HOST}:{config.PORT}/";
-
+            LogFactory.GetLog("GameServer:Loader").LogInfo(api);
+            
             if (args.Length > 0)
             {
                 int id = int.Parse(args[0]);
