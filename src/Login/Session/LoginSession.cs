@@ -24,8 +24,8 @@ namespace Login.Session
 
         public LoginSession(Server server, TcpClient client) : base(server, client)
         {
-            ConfigModel.Load();
-            api = "http://" + ConfigModel.HOST + ":" + ConfigModel.PORT + "/";
+            ConfigModel config = new ConfigModel();
+            api = "http://" + config.HOST + ":" + config.PORT + "/";
 
             _kickTask = new KickInactiveSession(this, server.Scheduler);
             server.Scheduler.AddTask(_kickTask, 1, true);

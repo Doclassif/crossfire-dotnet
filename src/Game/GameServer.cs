@@ -20,8 +20,8 @@ namespace Game {
 
         public GameServer(string[] args) : base(args)
         {
-            ConfigModel.Load();
-            api = "http://" + ConfigModel.HOST + ":" + ConfigModel.PORT + "/";
+            ConfigModel config = new ConfigModel();
+            api = "http://" + config.HOST + ":" + config.PORT + "/";
 
             if (args.Length > 0)
             {

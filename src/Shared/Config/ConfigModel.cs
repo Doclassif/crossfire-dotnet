@@ -6,12 +6,12 @@ namespace Shared.Config
 {
     public class ConfigModel
     {
-        public static string HOST;
-        public static int PORT;
-        public static string DB_IP, DB_NAME, DB_USER, DB_PASS;
-        public static int DB_PORT;
+        public string HOST;
+        public int PORT;
+        public string DB_IP, DB_NAME, DB_USER, DB_PASS;
+        public int DB_PORT;
 
-        public static void Load()
+        public void ConfigModel()
         {
             ConfigLoader config = new ConfigLoader(@"Settings.ini");
             HOST = config.getValue("Host", "127.0.0.1");
