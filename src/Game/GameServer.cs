@@ -21,7 +21,7 @@ namespace Game {
         public GameServer(string[] args) : base(args)
         {
             ConfigModel config = new ConfigModel();
-            api = "http://" + config.HOST + ":" + config.PORT + "/";
+            api = $"http://{config.HOST}:{config.PORT}/";
 
             if (args.Length > 0)
             {

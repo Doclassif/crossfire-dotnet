@@ -21,7 +21,7 @@ namespace Game.Session
         public GameSession(Server server, TcpClient client) : base(server, client)
         {
             ConfigModel config = new ConfigModel();
-            api = "http://" + config.HOST + ":" + config.PORT + "/";
+            api = $"http://{config.HOST}:{config.PORT}/";
         }
 
         protected override void OnRun(byte[] buffer)
