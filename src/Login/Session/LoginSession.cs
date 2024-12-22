@@ -12,6 +12,7 @@ using Shared.Model;
 using Shared.Network;
 using Shared.Util;
 using Shared.Util.Log.Factories;
+using Shared.Config;
 
 namespace Login.Session
 {
@@ -19,8 +20,13 @@ namespace Login.Session
     {
         private KickInactiveSession _kickTask;
         private User _user;
+        private string api;
+
         public LoginSession(Server server, TcpClient client) : base(server, client)
         {
+            ConfigModel config = ConfigModel.load();
+            api = "http://" + config.HOST + ":" + config.PORT + "/";
+
             _kickTask = new KickInactiveSession(this, server.Scheduler);
             server.Scheduler.AddTask(_kickTask, 1, true);
         }
@@ -80,7 +86,7 @@ namespace Login.Session
                         CreateAccountPacket createAccountPacket = (CreateAccountPacket) packet;
                         if (createAccountPacket.Confirmed)
                         {
-                            Internet.Get("http://localhost:3000/", $"user/nickname/change/{User.Id}/{createAccountPacket.Nickname}", result =>
+                            Internet.Get(api, $"user/nickname/change/{User.Id}/{createAccountPacket.Nickname}", result =>
                             {
                                 VerifyResult data = JsonConvert.DeserializeObject<VerifyResult>(result);
                                 if (data == null || !data.Result)
@@ -97,7 +103,7 @@ namespace Login.Session
                     break;
                 case CheckNameExistencePacket.NetworkId:
                     CheckNameExistencePacket p = (CheckNameExistencePacket) packet;
-                    Internet.Get("http://localhost:3000/", $"user/nickname/exists/{p.Nickname}", result =>
+                    Internet.Get(api, $"user/nickname/exists/{p.Nickname}", result =>
                     {
                         VerifyResult data = JsonConvert.DeserializeObject<VerifyResult>(result);
                         if (data != null)
@@ -119,7 +125,7 @@ namespace Login.Session
 
         private void Validate(LoginRequestDataPacket packet)
         {
-            Internet.Get("http://localhost:3000/", $"user/{packet.Username}", result =>
+            Internet.Get(api, $"user/{packet.Username}", result =>
             {
                 UserData data = JsonConvert.DeserializeObject<UserData>(result);
                 if (data != null)
@@ -168,7 +174,7 @@ namespace Login.Session
             {
                 case (short) PacketType.S2CValidAccount:
                     DataPacket response = null;
-                    Internet.Get("http://localhost:3000/", "server/all", result =>
+                    Internet.Get(api, "server/all", result =>
                     {
                         List<GameServer> servers = JsonConvert.DeserializeObject<List<GameServer>>(result);
                         response = new SendServerListPacket { Servers = servers, User = _user };

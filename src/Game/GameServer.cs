@@ -9,18 +9,25 @@ using Shared;
 using Shared.Enum;
 using Shared.Exceptions;
 using Shared.Util;
+using Shared.Config;
 
 namespace Game {
     public class GameServer : Server
     {
         public bool LoadedSettings;
         public int ChannelsCount = 5;
+        private string api;
+
         public GameServer(string[] args) : base(args)
         {
+            ConfigModel config = ConfigModel.load();
+            api = "http://" + config.HOST + ":" + config.PORT + "/";
+
             if (args.Length > 0)
             {
                 int id = int.Parse(args[0]);
-                Internet.Get("http://localhost:3000/", $"server/unique/{id}", result =>
+                
+                Internet.Get(api, $"server/unique/{id}", result =>
                 {
                     ServerSettingsRequest settings = JsonConvert.DeserializeObject<ServerSettingsRequest>(result);
                     if (settings != null && settings.Status != (int) HttpStatusCode.NotFound)

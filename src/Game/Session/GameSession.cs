@@ -8,6 +8,7 @@ using Shared.Model;
 using Shared.Network;
 using Shared.Util;
 using Shared.Util.Log.Factories;
+using Shared.Config;
 
 namespace Game.Session
 {
@@ -15,9 +16,12 @@ namespace Game.Session
     {
         private User _user;
         private FeverData _fever = new FeverData();
+        private string api;
 
         public GameSession(Server server, TcpClient client) : base(server, client)
         {
+            ConfigModel config = ConfigModel.load();
+            api = "http://" + config.HOST + ":" + config.PORT + "/";
         }
 
         protected override void OnRun(byte[] buffer)
@@ -68,14 +72,15 @@ namespace Game.Session
                     AuthToChannelServerPacket authToChannelServerPacket = (AuthToChannelServerPacket) packet;
                     Id = authToChannelServerPacket.Identifier;
                     SendPacket(authToChannelServerPacket);
-                    Internet.Get("http://localhost:3000/", $"user/{authToChannelServerPacket.Username}", result =>
+                    
+                    Internet.Get(api, $"user/{authToChannelServerPacket.Username}", result =>
                     {
                         UserData data = JsonConvert.DeserializeObject<UserData>(result);
                         if (data != null)
                         {
                             _user = data.User;
                             _user.Identifier = id;
-                            Internet.Get("http://localhost:3000/", $"user/fever/{_user.Id}",
+                            Internet.Get(api, $"user/fever/{_user.Id}",
                                 res =>
                                 {
                                     FeverData fData = JsonConvert.DeserializeObject<FeverData>(result);
@@ -119,7 +124,7 @@ namespace Game.Session
             switch (packet.Pid())
             {
                 case AuthToChannelServerPacket.NetworkId:
-                    Internet.Get("http://localhost:3000/", $"battle/statistics/{User.Id}", result =>
+                    Internet.Get(api, $"battle/statistics/{User.Id}", result =>
                     {
                         BattleData data = JsonConvert.DeserializeObject<BattleData>(result);
                         if (data != null)
