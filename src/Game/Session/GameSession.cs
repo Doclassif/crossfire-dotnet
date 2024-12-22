@@ -20,7 +20,8 @@ namespace Game.Session
 
         public GameSession(Server server, TcpClient client) : base(server, client)
         {
-            ConfigModel config = ConfigModel.Load();
+            ConfigModel config = new ConfigModel();
+            config.Load();
             api = "http://" + config.HOST + ":" + config.PORT + "/";
         }
 

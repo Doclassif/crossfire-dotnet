@@ -11,7 +11,7 @@ namespace Shared.Config
         public static string DB_IP, DB_NAME, DB_USER, DB_PASS;
         public static int DB_PORT;
 
-        public static void Load()
+        public void Load()
         {
             ConfigLoader config = new ConfigLoader(@"Settings.ini");
             HOST = config.getValue("Host", "127.0.0.1");
