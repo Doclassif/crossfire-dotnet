@@ -24,7 +24,7 @@ jobs:
     name: .NET Core ${{ matrix.dotnet }}
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Setup .NET ${{ matrix.dotnet }}
         uses: actions/setup-dotnet@v1
         with:
@@ -36,22 +36,22 @@ jobs:
       - name: Test
         run: dotnet test --no-build --verbosity normal
       - name: Upload a Shared Build Artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Shared-Package
           path: ${{github.workspace}}/src/Shared/bin/Debug/netcoreapp3.1/
       - name: Upload a HGWC Build Artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: HGWC-Package
           path: ${{github.workspace}}/src/HGWC/bin/Debug/netcoreapp3.1/
       - name: Upload a Login Build Artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Login-Package
           path: ${{github.workspace}}/src/Login/bin/Debug/netcoreapp3.1/
       - name: Upload a Game Build Artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Game-Package
           path: ${{github.workspace}}/src/Game/bin/Debug/netcoreapp3.1/
