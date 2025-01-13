@@ -44,8 +44,8 @@ namespace Shared
                 Thread.CurrentThread.Name = name;
                 LogFactory.GetLog(name).LogInfo("Loading server...");
                 try {
-                    //IPAddress ipAddress = IPAddress.Parse(address);
-                    TcpListener server = new TcpListener(address, port);
+                    IPAddress ipAddress = IPAddress.Parse(address);
+                    TcpListener server = new TcpListener(ipAddress, port);
                     server.Start();
                     LogFactory.GetLog(name).LogInfo($"Listening at {ipAddress}:{port}.");
                     while (IsAlive)
