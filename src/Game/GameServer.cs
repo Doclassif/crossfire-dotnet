@@ -37,6 +37,7 @@ namespace Game {
                     {
                         name = settings.Server.Name;
                         maxConnections = (int) settings.Server.Limit;
+                        address = settings.Server.Address;
                         port = settings.Server.Port;
                         type = ServerType.Game;
                         LoadedSettings = true;
