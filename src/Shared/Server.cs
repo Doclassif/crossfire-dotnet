@@ -45,7 +45,7 @@ namespace Shared
                 LogFactory.GetLog(name).LogInfo("Loading server...");
                 try {
                     //IPAddress ipAddress = IPAddress.Parse(address);
-                    TcpListener server = new TcpListener(ipAddress, port);
+                    TcpListener server = new TcpListener(address, port);
                     server.Start();
                     LogFactory.GetLog(name).LogInfo($"Listening at {ipAddress}:{port}.");
                     while (IsAlive)
