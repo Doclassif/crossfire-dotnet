@@ -8,10 +8,12 @@ namespace Login {
     public class LoginServer : Server {
         public LoginServer(string[] args) : base(args)
         {
+            ConfigModel config = new ConfigModel();
             name = "Login Server";
             type = ServerType.Authentication;
-            port = 13008;
-            maxConnections = 200;
+            address = config.LOGIN_ADDRESS;
+            port = config.LOGIN_PORT;
+            maxConnections = config.LOGIN_MAX_CONNECTIONS;
             network = new LoginNetwork();
             base.RegisterDefaultSchedulers();
             // Scheduler.AddTask(new TestTask(Scheduler), 1, true);

@@ -8,8 +8,8 @@ namespace Shared.Config
     {
         public string HOST;
         public int PORT;
-        public string DB_IP, DB_NAME, DB_USER, DB_PASS;
-        public int DB_PORT;
+        public string DB_IP, DB_NAME, DB_USER, DB_PASS, LOGIN_ADDRESS;
+        public int DB_PORT, LOGIN_PORT, LOGIN_MAX_CONNECTIONS;
 
         public ConfigModel()
         {
@@ -21,6 +21,9 @@ namespace Shared.Config
             DB_USER = config.getValue("DataBaseUser", "root");
             DB_PASS = config.getValue("DataBasePass", "");
             DB_PORT = int.Parse(config.getValue("DataBasePort", "3306"));
+            LOGIN_ADDRESS = config.getValue("LoginAddress", "127.0.0.1");
+            LOGIN_PORT = int.Parse(config.getValue("LoginPort", "13008"));
+            LOGIN_MAX_CONNECTIONS = int.Parse(config.getValue("LoginMaxConnections", "200"));
         }
     }
 }
