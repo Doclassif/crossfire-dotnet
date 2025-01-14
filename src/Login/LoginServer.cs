@@ -3,6 +3,7 @@ using Login.Network;
 using Login.Session;
 using Shared;
 using Shared.Enum;
+using Shared.Config;
 
 namespace Login {
     public class LoginServer : Server {
