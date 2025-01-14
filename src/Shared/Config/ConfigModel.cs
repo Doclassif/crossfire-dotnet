@@ -22,7 +22,7 @@ namespace Shared.Config
             DB_PASS = config.getValue("DataBasePass", "");
             DB_PORT = int.Parse(config.getValue("DataBasePort", "3306"));
             LOGIN_ADDRESS = config.getValue("LoginAddress", "127.0.0.1");
-            LOGIN_PORT = int.Parse(config.getValue("LoginPort", "13008"));
+            LOGIN_PORT = ushort.Parse(config.getValue("LoginPort", "13008"));
             LOGIN_MAX_CONNECTIONS = int.Parse(config.getValue("LoginMaxConnections", "200"));
         }
     }
